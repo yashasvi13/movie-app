@@ -21,7 +21,11 @@ const Movie = props => {
         </div>
         <div className="crad-content">
           <p>
-            <a href="#">Know more!</a>
+            {props.title}
+            <br />
+            <a href="#" onClick={() => props.knowMore(props.movieId)}>
+              Know more!
+            </a>
           </p>
         </div>
       </div>

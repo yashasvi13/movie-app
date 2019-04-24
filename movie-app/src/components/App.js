@@ -3,13 +3,15 @@ import "../App.css";
 import Navbar from "./Navbar";
 import Search from "./Search";
 import MovieList from "./MovieList";
+import KnowMore from "./KnowMore";
 // const API_KEY=process.env.REACT_APP_API
 class App extends Component {
   constructor() {
     super();
     this.state = {
       movies: [],
-      searchInput: ""
+      searchInput: "",
+      currentMovie: null
     };
     // this.apiKey = process.env.REACT_APP_API;
   }
@@ -33,15 +35,37 @@ class App extends Component {
       searchInput: e.target.value
     });
   };
+  knowMore = id => {
+    let filteredMovie;
+    this.state.movies.forEach((movie, i) => {
+      if (movie.id === id) {
+        filteredMovie = movie;
+      }
+    });
+
+    this.setState({ currentMovie: filteredMovie });
+  };
+  closeMovie = () => {
+    this.setState({ currentMovie: null });
+  };
   render() {
     return (
       <div className="App">
         <Navbar />
-        <Search
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-        />
-        <MovieList movies={this.state.movies} />
+        {this.state.currentMovie == null ? (
+          <div>
+            <Search
+              handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+            />
+            <MovieList knowMore={this.knowMore} movies={this.state.movies} />
+          </div>
+        ) : (
+          <KnowMore
+            closeMovie={this.closeMovie}
+            currentMovie={this.state.currentMovie}
+          />
+        )}
       </div>
     );
   }

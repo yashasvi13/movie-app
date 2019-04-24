@@ -6,7 +6,17 @@ const MovieList = props => {
       <div className="row">
         <div className="col s12">
           {props.movies.map((movie, i) => {
-            return <Movie key={i} image={movie.poster_path} />;
+            return (
+              <Movie
+                key={movie.id}
+                knowMore={props.knowMore}
+                movieId={movie.id}
+                title={movie.title}
+                overview={movie.overview}
+                image={movie.poster_path}
+                date={movie.release_date}
+              />
+            );
           })}
         </div>
       </div>
