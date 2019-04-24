@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "../App.css";
 import Navbar from "./Navbar";
 import Search from "./Search";
-
+import MovieList from "./MovieList";
+// const API_KEY=process.env.REACT_APP_API
 class App extends Component {
   constructor() {
     super();
@@ -10,12 +11,12 @@ class App extends Component {
       movies: [],
       searchInput: ""
     };
-    this.apiKey = process.env.REACT_APP_API;
+    // this.apiKey = process.env.REACT_APP_API;
   }
   handleSubmit = e => {
     e.preventDefault();
     fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${
+      `https://api.themoviedb.org/3/search/movie?api_key=af4d09c2564d324375f6423212eb7f0e&query=${
         this.state.searchInput
       }    `
     )
@@ -23,7 +24,7 @@ class App extends Component {
       .then(data => {
         console.log(data);
         this.setState({
-          movies: [data.results]
+          movies: [...data.results]
         });
       });
   };
@@ -40,6 +41,7 @@ class App extends Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
+        <MovieList movies={this.state.movies} />
       </div>
     );
   }
