@@ -1,0 +1,12 @@
+.head {
+  font-weight: bold;
+}
+
+body {
+  background-color: beige;
+}
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-color: lightcoral;
+  box-shadow: none;
+}

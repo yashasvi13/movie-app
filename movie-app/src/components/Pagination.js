@@ -24,7 +24,9 @@ const Pagination = props => {
               className="waves-effect"
               onClick={() => props.nextPage(props.activePage - 1)}
             >
-              <a href="#!">Previous</a>
+              <a href="#!" className="btn red white-text lighten-2">
+                Previous
+              </a>
             </li>
           ) : (
             ""
@@ -35,7 +37,9 @@ const Pagination = props => {
               className="waves-effect"
               onClick={() => props.nextPage(props.activePage + 1)}
             >
-              <a href="#!">Next</a>
+              <a href="#!" className="btn red white-text lighten-2">
+                Next
+              </a>
             </li>
           ) : (
             ""
