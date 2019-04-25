@@ -9,7 +9,6 @@ const KnowMore = props => {
           onClick={props.closeMovie}
           style={{ cursor: "pointer", paddingTop: 50 }}
         >
-          <i className="fas fa-arrow-left" />
           <span style={{ marginLeft: 10 }}>Go back</span>
         </div>
         <div className="row">
@@ -28,7 +27,7 @@ const KnowMore = props => {
                   props.currentMovie.poster_path
                 }`}
                 alt="Card image"
-                style={{ width: "100%", height: 360 }}
+                style={{ width: "100%", height: 300 }}
               />
             )}
           </div>

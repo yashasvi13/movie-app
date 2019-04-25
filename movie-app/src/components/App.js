@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Search from "./Search";
 import MovieList from "./MovieList";
 import KnowMore from "./KnowMore";
+import Pagination from "./Pagination";
 // const API_KEY=process.env.REACT_APP_API
 class App extends Component {
   constructor() {
@@ -11,7 +12,9 @@ class App extends Component {
     this.state = {
       movies: [],
       searchInput: "",
-      currentMovie: null
+      currentMovie: null,
+      totalMovies: 0,
+      activePage: 1
     };
     // this.apiKey = process.env.REACT_APP_API;
   }
@@ -26,7 +29,8 @@ class App extends Component {
       .then(data => {
         console.log(data);
         this.setState({
-          movies: [...data.results]
+          movies: [...data.results],
+          totalMovies: data.total_results
         });
       });
   };
@@ -48,7 +52,23 @@ class App extends Component {
   closeMovie = () => {
     this.setState({ currentMovie: null });
   };
+  nextPage = pageNumber => {
+    fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=af4d09c2564d324375f6423212eb7f0e&query=${
+        this.state.searchInput
+      }&page=${pageNumber}`
+    )
+      .then(data => data.json())
+      .then(data => {
+        this.setState({
+          movies: [...data.results],
+          totalMovies: data.total_results,
+          activePage: pageNumber
+        });
+      });
+  };
   render() {
+    let numberPages = Math.floor(this.state.totalMovies / 20);
     return (
       <div className="App">
         <Navbar />
@@ -65,6 +85,15 @@ class App extends Component {
             closeMovie={this.closeMovie}
             currentMovie={this.state.currentMovie}
           />
+        )}
+        {this.state.totalMovies > 20 && this.state.currentMovie == null ? (
+          <Pagination
+            pages={numberPages}
+            nextPage={this.nextPage}
+            activePage={this.state.activePage}
+          />
+        ) : (
+          ""
         )}
       </div>
     );

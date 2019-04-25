@@ -3,10 +3,10 @@ import React from "react";
 const Navbar = () => {
   return (
     <nav>
-      <div className="nav-wrapper  blue">
+      <div className="nav-wrapper grey">
         <div className="container">
           <a href="#" className="brand-logo">
-            Movie Maniac
+            Find your movie!
           </a>
         </div>
       </div>
